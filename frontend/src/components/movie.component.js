@@ -65,7 +65,7 @@ const Movie = () => {
                     />
                 </div>
                 <div>
-                    <label>Duration (in minutes): </label>
+                    <label>Duration (in seconds): </label>
                     <input 
                         type="number" 
                         placeholder="Duration" 
