@@ -21,14 +21,18 @@ const MovieService = {
   getMovies: async () => {
     return axios.get(`${API_URL}${API_URL_MOVIE}`, { headers: authHeader() })
       .then(response => {
-        console.log("Movies fetched:", response.data);
         return response.data;
       })
       .catch(error => {
         console.error("Error fetching movies:", error);
         throw error;
       });
+  },
+
+  deleteMovie: async (id) => {
+    return axios.delete(`${API_URL}${API_URL_MOVIE}/admin/${id}`, { headers: authHeader() });
   }
+
 };
 
 export default MovieService;

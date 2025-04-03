@@ -11,12 +11,16 @@ const AuthService = {
     return axios.post(`${API_URL}${API_URL_AUTH}/signin`, { username, password })
         .then(response => {
             if (response.data) {
-                localStorage.setItem("accessToken", JSON.stringify(response.data));
+                localStorage.setItem("accessToken", response.data);
+                console.log(localStorage.getItem("accessToken"))
             }
 
             return response.data;
         });
   },
+  logout() {
+    localStorage.removeItem("accessToken");
+  }
 };
 
 export default AuthService;

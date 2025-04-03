@@ -23,7 +23,7 @@ const Movie = () => {
     const handleCreateMovie = async (e) => {
         e.preventDefault();
         try {
-            const duration = parseInt(timeDuration, 10);
+            const duration = parseInt(timeDuration, 10) * 60;
             await MovieService.createMovie(name, duration);
             alert("Movie created successfully");
             fetchMovies();
@@ -32,6 +32,15 @@ const Movie = () => {
             setTimeDuration("");
         } catch (err) {
             setError("Failed to create movie");
+        }
+    };
+
+    const handleDeleteMovie = async (id) => {
+        try {
+            await MovieService.deleteMovie(id);
+            fetchMovies();
+        } catch (err) {
+            console.error("Failed to delete movie:", err);
         }
     };
 
@@ -65,13 +74,14 @@ const Movie = () => {
                     />
                 </div>
                 <div>
-                    <label>Duration (in seconds): </label>
+                    <label>Duration (in minutes): </label>
                     <input 
                         type="number" 
                         placeholder="Duration" 
                         value={timeDuration} 
                         onChange={(e) => setTimeDuration(e.target.value)} 
-                        required 
+                        required
+                        min="0"
                     />
                 </div>
                 <button type="submit">Create Movie</button>
@@ -85,6 +95,9 @@ const Movie = () => {
                     movies.map((movie) => (
                         <li key={movie.id}>
                             <strong>{movie.name}</strong> - {parseDuration(movie.timeDuration)} minutes
+                            <button onClick={() => handleDeleteMovie(movie.id)} style={{ marginLeft: "10px", backgroundColor: "grey", color: "white", border: "none", cursor: "pointer" }}>
+                                Delete
+                            </button>
                         </li>
                     ))
                 )}

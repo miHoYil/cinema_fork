@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,6 @@ import com.app.cinema.repositories.UserRepository;
 import com.app.cinema.security.AuthExc;
 import com.app.cinema.services.AuthService;
 
-@CrossOrigin(origins = "*", maxAge = 604800)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
