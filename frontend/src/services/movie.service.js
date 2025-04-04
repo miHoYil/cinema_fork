@@ -31,7 +31,16 @@ const MovieService = {
 
   deleteMovie: async (id) => {
     return axios.delete(`${API_URL}${API_URL_MOVIE}/admin/${id}`, { headers: authHeader() });
-  }
+  },
+
+  updateMovie: async (id, name, timeDuration) => {
+    return axios.put(`${API_URL}${API_URL_MOVIE}/admin/${id}`, { name, timeDuration }, { headers: authHeader() })
+        .then(response => response.data)
+        .catch(error => {
+            console.error("Error updating movie:", error);
+            throw error;
+        });
+  },
 
 };
 
