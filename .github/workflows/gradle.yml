@@ -15,8 +15,10 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend  # Affects all `run` steps
     permissions:
       contents: read
 
@@ -34,11 +36,9 @@ jobs:
       uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
 
     - name: Use Gradle Wrapper
-      working-directory: ./backend
       run: gradle wrapper
       
     - name: Build with Gradle Wrapper
-      working-directory: ./backend
       run: ./gradlew build -x test
 
 
@@ -57,6 +57,9 @@ jobs:
   dependency-submission:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend  # Affects all `run` steps
     permissions:
       contents: write
 
