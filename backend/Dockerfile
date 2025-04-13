@@ -1,8 +1,13 @@
-FROM openjdk:17.0-jdk
-
+FROM gradle:8.13-jdk17 AS build
 WORKDIR /app
 
-COPY build/libs/demo-0.0.1-SNAPSHOT.jar .
-EXPOSE 7999
+COPY . /app
+RUN gradle bootJar --no-daemon
 
-CMD [ "java", "-jar", "demo-0.0.1-SNAPSHOT.jar" ]
+FROM openjdk:17.0-jdk
+WORKDIR /app
+
+COPY --from=build /app/build/libs/app.jar ./app.jar
+
+EXPOSE 7999
+CMD ["java", "-jar", "app.jar"]

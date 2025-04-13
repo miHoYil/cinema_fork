@@ -1,0 +1,37 @@
+version: '3.9'
+services:
+  cinemadb:
+    container_name: cinemadb
+    image: postgres
+    environment:
+      POSTGRES_USER: cinemadb
+      POSTGRES_PASSWORD: cinemadb
+      POSTGRES_DB: cinemadb
+    volumes:
+      - ./backend/pg-data:/var/lib/postgresql/data
+    ports:
+      - "5435:5432"
+
+  cinemaapp:
+    container_name: cinemaapp
+    image: danielsheh/cinema_cinemaapp:latest
+    # build:
+    #   context: ./backend
+    #   dockerfile: Dockerfile
+    ports:
+      - "7999:7999"
+    depends_on:
+      - cinemadb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://cinemadb:5432/cinemadb
+      SPRING_DATASOURCE_USERNAME: cinemadb
+      SPRING_DATASOURCE_PASSWORD: cinemadb
+
+  cinemafront:
+    container_name: cinemafront
+    image: danielsheh/cinema_cinemafront:latest
+    # build:
+    #   context: ./frontend
+    #   dockerfile: Dockerfile
+    ports:
+      - "3000:80"
