@@ -1,7 +1,8 @@
 import axios from "axios";
 import authHeader from "./auth_header.service";
+import config from '../config';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = config.API_URL;
 const API_URL_MOVIE = "/api/movies";
 
 const MovieService = {

@@ -1,6 +1,7 @@
 import axios from "axios";
+import config from '../config';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = config.API_URL;
 const API_URL_AUTH = "/api/auth";
 
 const AuthService = {
