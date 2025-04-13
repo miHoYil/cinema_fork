@@ -85,8 +85,9 @@ const Movie = () => {
             <h2>Create Movie</h2>
             <form onSubmit={handleCreateMovie}>
                 <div>
-                    <label>Name: </label>
-                    <input 
+                    <label htmlFor="movieName">Name: </label>
+                    <input
+                        id="movieName"
                         type="text" 
                         placeholder="Movie Name" 
                         value={name} 
@@ -95,8 +96,9 @@ const Movie = () => {
                     />
                 </div>
                 <div>
-                    <label>Duration (in minutes): </label>
+                    <label htmlFor="movieDuration">Duration (in minutes): </label>
                     <input 
+                        id="movieDuration"
                         type="number" 
                         placeholder="Duration" 
                         value={timeDuration} 
