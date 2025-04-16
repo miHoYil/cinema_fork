@@ -1,0 +1,10 @@
+- name: Stop Docker Compose Stack
+  hosts: my_vm
+  become: yes
+
+  tasks:
+    - name: Tear down Docker Compose stack
+      community.docker.docker_compose:
+        project_src: /opt/myapp
+        state: absent
+        remove_orphans: yes

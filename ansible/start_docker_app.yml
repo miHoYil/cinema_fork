@@ -1,0 +1,28 @@
+- name: Deploy Docker Compose Stack
+  hosts: my_vm
+  become: yes
+  tasks:
+
+    - name: Ensure directory /opt/myapp exists
+      ansible.builtin.file:
+        path: /opt/myapp
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: '0755'
+
+    - name: Copy docker-compose.yml to VM
+      ansible.builtin.copy:
+        src: ./docker-compose.yml
+        dest: /opt/myapp/docker-compose.yml
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: '0644'
+
+    - name: Start Docker Compose services
+      community.docker.docker_compose:
+        project_src: /opt/myapp
+        state: present
+        recreate: always
+        pull: yes
+
